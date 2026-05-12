@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JeenaFlix Player</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      width: 100%;
+      height: 100%;
+    }
+    video {
+      width: 100%;
+      height: 100vh;
+      background: #000;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <video id="video" controls autoplay playsinline></video>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    const video = document.getElementById("video");
+    const videoSrc = "https://s22.nm-cdn11.top/files/81928701/a/0/0.m3u8";
+
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      video.src = videoSrc;
+    } else {
+      document.body.innerHTML =
+        "<p style='color:white;text-align:center;margin-top:40px'>یہ browser HLS support نہیں کرتا۔</p>";
+    }
+  </script>
+</body>
+</html>
